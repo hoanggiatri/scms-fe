@@ -7,12 +7,14 @@ const StatusSummaryCard = ({
   getStatus,
   statusColors = {},
   onSelectStatus,
-  selectedStatus
+  selectedStatus,
 }) => {
+  const items = Array.isArray(data) ? data : [];
   const countByStatus = statusLabels.reduce((count, label) => {
-    count[label] = label === "Tất cả"
-      ? data.length
-      : data.filter(item => getStatus(item) === label).length;
+    count[label] =
+      label === "Tất cả"
+        ? items.length
+        : items.filter((item) => getStatus(item) === label).length;
     return count;
   }, {});
 
@@ -39,23 +41,30 @@ const StatusSummaryCard = ({
                 transition: "all 0.2s ease",
                 ...(isSelected
                   ? {
-                    '&:hover': {
-                      backgroundColor: "#fff",
-                      borderWidth: "2px",
-                      borderColor: statusColors[label],
-                      color: statusColors[label],
-                    },
-                  }
+                      "&:hover": {
+                        backgroundColor: "#fff",
+                        borderWidth: "2px",
+                        borderColor: statusColors[label],
+                        color: statusColors[label],
+                      },
+                    }
                   : {
-                    '&:hover': {
-                      backgroundColor: statusColors[label],
-                      boxShadow: "0 4px 12px rgba(0, 0, 0, 0.2)",
-                    },
-                  }),
+                      "&:hover": {
+                        backgroundColor: statusColors[label],
+                        boxShadow: "0 4px 12px rgba(0, 0, 0, 0.2)",
+                      },
+                    }),
               }}
             >
-              <Box display="flex" justifyContent="space-between" width="100%" gap={1}>
-                <Typography variant="h6" fontWeight="bold">{label}</Typography>
+              <Box
+                display="flex"
+                justifyContent="space-between"
+                width="100%"
+                gap={1}
+              >
+                <Typography variant="h6" fontWeight="bold">
+                  {label}
+                </Typography>
                 <Typography variant="h6" fontWeight="bold">
                   {countByStatus[label] || 0}
                 </Typography>

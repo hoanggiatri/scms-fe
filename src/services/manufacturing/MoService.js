@@ -31,7 +31,18 @@ export const updateMo = async (moId, mo, token) => {
 };
 
 export const getManufactureReport = async (request, companyId, token) => {
-  const response = await axios.post(`${BASE_URL}/manufacture-order/report/${companyId}`, request, axiosAuth(token));
+  const response = await axios.post(
+    `${BASE_URL}/manufacture-order/report/${companyId}`,
+    {},
+    {
+      params: {
+        startTime: request?.startTime,
+        endTime: request?.endTime,
+        type: request?.type,
+      },
+      ...axiosAuth(token),
+    }
+  );
   return response.data;
 };
 

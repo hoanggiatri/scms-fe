@@ -5,31 +5,31 @@ const axiosAuth = (token) => ({
 });
 
 export const createQuotation = async (quotationRequest, token) => {
-  const res = await axios.post(`${BASE_URL}/user/create-quotation`, quotationRequest, axiosAuth(token));
+  const res = await axios.post(`${BASE_URL}/quotations`, quotationRequest, axiosAuth(token));
   return res.data;
 };
 
 export const getAllQuotationsInCompany = async (companyId, token) => {
-  const res = await axios.get(`${BASE_URL}/user/get-all-quotations-in-com/${companyId}`, axiosAuth(token));
+  const res = await axios.get(`${BASE_URL}/quotations/company/${companyId}`, axiosAuth(token));
   return res.data;
 };
 
 export const getAllQuotationsInRequestCompany = async (requestCompanyId, token) => {
-  const res = await axios.get(`${BASE_URL}/user/get-all-quotation-in-request-company/${requestCompanyId}`, axiosAuth(token));
+  const res = await axios.get(`${BASE_URL}/quotations/request-company/${requestCompanyId}`, axiosAuth(token));
   return res.data;
 };
 
 export const getQuotationById = async (quotationId, token) => {
-  const res = await axios.get(`${BASE_URL}/user/get-quotation-by-id/${quotationId}`, axiosAuth(token));
+  const res = await axios.get(`${BASE_URL}/quotations/${quotationId}`, axiosAuth(token));
   return res.data;
 };
 
 export const getQuotationByRfq = async (rfqId, token) => {
-  const res = await axios.get(`${BASE_URL}/user/get-quotation-by-rfq/${rfqId}`, axiosAuth(token));
+  const res = await axios.get(`${BASE_URL}/quotations/rfq/${rfqId}`, axiosAuth(token));
   return res.data;
 };
 
 export const updateQuotationStatus = async (quotationId, status, token) => {
-  const res = await axios.put(`${BASE_URL}/user/update-quotation-status/${quotationId}?status=${status}`, {}, axiosAuth(token));
+  const res = await axios.put(`${BASE_URL}/quotations/${quotationId}?status=${status}`, {}, axiosAuth(token));
   return res.data;
 };

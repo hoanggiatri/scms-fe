@@ -5,26 +5,26 @@ const axiosAuth = (token) => ({
 });
 
 export const createRfq = async (rfqRequest, token) => {
-  const res = await axios.post(`${BASE_URL}/user/create-rfq`, rfqRequest, axiosAuth(token));
+  const res = await axios.post(`${BASE_URL}/request-for-quotations`, rfqRequest, axiosAuth(token));
   return res.data;
 };
 
 export const getAllRfqsInCompany = async (companyId, token) => {
-  const res = await axios.get(`${BASE_URL}/user/get-all-rfq-in-com/${companyId}`, axiosAuth(token));
+  const res = await axios.get(`${BASE_URL}/request-for-quotations/company/${companyId}`, axiosAuth(token));
   return res.data;
 };
 
 export const getAllRfqsInRequestedCompany = async (requestedCompanyId, token) => {
-  const res = await axios.get(`${BASE_URL}/user/get-all-rfq-in-requested-company/${requestedCompanyId}`, axiosAuth(token));
+  const res = await axios.get(`${BASE_URL}/request-for-quotations/request-company/${requestedCompanyId}`, axiosAuth(token));
   return res.data;
 };
 
 export const getRfqById = async (rfqId, token) => {
-  const res = await axios.get(`${BASE_URL}/user/get-rfq-by-id/${rfqId}`, axiosAuth(token));
+  const res = await axios.get(`${BASE_URL}/request-for-quotations/${rfqId}`, axiosAuth(token));
   return res.data;
 };
 
 export const updateRfqStatus = async (rfqId, status, token) => {
-  const res = await axios.put(`${BASE_URL}/user/update-rfq-status/${rfqId}?status=${status}`, {}, axiosAuth(token));
+  const res = await axios.put(`${BASE_URL}/request-for-quotations/${rfqId}?status=${status}`, {}, axiosAuth(token));
   return res.data;
 };
