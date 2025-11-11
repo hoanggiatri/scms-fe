@@ -132,9 +132,18 @@ const EditCompany = () => {
     const token = localStorage.getItem("token");
 
     try {
-      const newLogoUrl = await updateCompanyLogo(companyId, logoFile, token);
-      const updatedLogoUrl = `${newLogoUrl}?${Date.now()}`;
-      setCompany((prev) => ({ ...prev, logoUrl: updatedLogoUrl }));
+      await updateCompanyLogo(companyId, logoFile, token);
+
+      // Fetch lại thông tin company từ server để lấy URL logo mới
+      const updatedCompany = await getCompanyById(companyId, token);
+
+      // Thêm timestamp để tránh cache
+      if (updatedCompany.logoUrl) {
+        updatedCompany.logoUrl = `${updatedCompany.logoUrl}?t=${Date.now()}`;
+      }
+
+      setCompany(updatedCompany);
+      setEditedCompany(updatedCompany);
       setLogoFile(null);
       setLogoPreview(null);
       alert("Cập nhật logo thành công!");

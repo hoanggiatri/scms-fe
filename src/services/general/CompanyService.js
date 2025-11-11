@@ -23,7 +23,7 @@ export const updateCompany = async (companyId, data, token) => {
 
 export const updateCompanyLogo = async (companyId, file, token) => {
   const formData = new FormData();
-  formData.append("logo", file);
+  formData.append("file", file);
   const res = await axios.post(`${BASE_URL}/admin/company/${companyId}/logo`,
     formData,
     {
